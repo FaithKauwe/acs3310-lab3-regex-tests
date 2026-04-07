@@ -1,86 +1,73 @@
 import { describe, it, expect } from 'vitest'
 import {
-  removeNegatives,
-  endsWith,
-  take,
-  countBy,
-  unique,
+  collapseSpaces,
+  toKebabCase,
+  firstWords,
+  isLowercasePhrase,
+  countWords,
 } from '../src/functions'
 
-describe('removeNegatives', () => {
-  it('removes negative numbers', () => {
-    expect(removeNegatives([-3, -1, 2, 4])).toEqual([2, 4])
+// Your job in this lab:
+// Read the function documentation in src/functions.ts
+// Then write tests that prove the implementations do NOT match the documented behavior.
+// These placeholder tests pass now, but they do not test anything useful.
+// Replace them with real tests.
+
+describe('collapseSpaces', () => {
+  it('write tests that prove collapseSpaces does not match its documentation', () => {
+    expect(true).toBe(true)
   })
 
-  it('keeps 0 and positive numbers', () => {
-    expect(removeNegatives([-2, 0, 1, 3])).toEqual([0, 1, 3])
-  })
-
-  it('returns an empty array when all numbers are negative', () => {
-    expect(removeNegatives([-5, -2, -1])).toEqual([])
-  })
+  // Ideas:
+  // - repeated spaces should collapse to one space
+  // - leading/trailing whitespace should be removed
+  // - tabs and newlines should be handled
 })
 
-describe('endsWith', () => {
-  it('returns true when the string ends with the given ending', () => {
-    expect(endsWith('hello', 'lo')).toBe(true)
+describe('toKebabCase', () => {
+  it('write tests that prove toKebabCase does not match its documentation', () => {
+    expect(true).toBe(true)
   })
 
-  it('returns false when the string does not end with the given ending', () => {
-    expect(endsWith('hello', 'he')).toBe(false)
-  })
-
-  it('returns true when the ending is the whole string', () => {
-    expect(endsWith('cat', 'cat')).toBe(true)
-  })
+  // Ideas:
+  // - uppercase letters should become lowercase
+  // - spaces should become hyphens
+  // - punctuation should be removed
+  // - extra hyphens should not remain at the start or end
 })
 
-describe('take', () => {
-  it('returns the first count items', () => {
-    expect(take([1, 2, 3, 4], 2)).toEqual([1, 2])
+describe('firstWords', () => {
+  it('write tests that prove firstWords does not match its documentation', () => {
+    expect(true).toBe(true)
   })
 
-  it('returns an empty array when count is 0', () => {
-    expect(take([1, 2, 3], 0)).toEqual([])
-  })
-
-  it('returns the whole array when count is larger than array length', () => {
-    expect(take([1, 2], 5)).toEqual([1, 2])
-  })
+  // Ideas:
+  // - should return only the first N words
+  // - should return the full string if it is shorter than the limit
+  // - should return an empty string when maxWords is 0
 })
 
-describe('countBy', () => {
-  it('counts items by the key returned from the callback', () => {
-    const words = ['ant', 'bear', 'cat', 'dog']
-    expect(countBy(words, word => String(word.length))).toEqual({
-      '3': 3,
-      '4': 1,
-    })
+describe('isLowercasePhrase', () => {
+  it('write tests that prove isLowercasePhrase does not match its documentation', () => {
+    expect(true).toBe(true)
   })
 
-  it('counts repeated categories correctly', () => {
-    const nums = [1, 2, 3, 4, 5, 6]
-    expect(countBy(nums, n => (n % 2 === 0 ? 'even' : 'odd'))).toEqual({
-      odd: 3,
-      even: 3,
-    })
-  })
-
-  it('returns an empty object for an empty array', () => {
-    expect(countBy([], () => 'x')).toEqual({})
-  })
+  // Ideas:
+  // - valid lowercase phrases should return true
+  // - uppercase letters should be rejected
+  // - punctuation should be rejected
+  // - leading/trailing whitespace should be rejected
+  // - empty strings should be rejected
 })
 
-describe('unique', () => {
-  it('removes duplicate numbers', () => {
-    expect(unique([1, 1, 2, 3, 3])).toEqual([1, 2, 3])
+describe('countWords', () => {
+  it('write tests that prove countWords does not match its documentation', () => {
+    expect(true).toBe(true)
   })
 
-  it('preserves the first occurrence order', () => {
-    expect(unique(['b', 'a', 'b', 'c', 'a'])).toEqual(['b', 'a', 'c'])
-  })
-
-  it('returns an empty array when given an empty array', () => {
-    expect(unique([])).toEqual([])
-  })
+  // Ideas:
+  // - count words separated by spaces
+  // - handle repeated spaces correctly
+  // - return 0 for empty string
+  // - return 0 for whitespace-only string
 })

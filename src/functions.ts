@@ -1,45 +1,44 @@
-// Return a new array with all negative numbers removed.
-// Keep 0 and positive numbers.
+// Return the text with repeated whitespace collapsed to single spaces.
+// Also remove whitespace from the beginning and end.
 // Example:
-// removeNegatives([-2, 0, 3]) -> [0, 3]
-export function removeNegatives(nums: number[]): number[] {
-  return nums.filter(n => n > 0) // bug
+// collapseSpaces('  Hello   world\n\nfoo  ') -> 'Hello world foo'
+export function collapseSpaces(text: string): string {
+  return text.replace(/\s+/g, ' ') // bug: does not trim
 }
 
-// Return true if text ends with the given ending.
+// Convert text to kebab-case.
+// Lowercase the text, remove punctuation, replace spaces with hyphens,
+// and remove extra hyphens from the beginning and end.
 // Example:
-// endsWith('hello', 'lo') -> true
-export function endsWith(text: string, ending: string): boolean {
-  return text.startsWith(ending) // bug
+// toKebabCase('Hello, World!') -> 'hello-world'
+export function toKebabCase(text: string): string {
+  return text.toLowerCase().replace(/\s+/g, '-') // bug: leaves punctuation and extra hyphens
 }
 
-// Return the first `count` items from the array.
-// If count is 0, return an empty array.
-// If count is larger than the array length, return the whole array.
+// Return the first `maxWords` words from the text.
+// If the text has fewer words than the limit, return it unchanged.
 // Example:
-// take([1, 2, 3, 4], 2) -> [1, 2]
-export function take<T>(arr: T[], count: number): T[] {
-  return arr.slice(0, count + 1) // bug
+// firstWords('The quick brown fox jumps', 3) -> 'The quick brown'
+export function firstWords(text: string, maxWords: number): string {
+  return text.split(' ').slice(0, maxWords + 1).join(' ') // bug: returns one extra word
 }
 
-// Count how many items belong to each group.
-// The callback returns the group name for each item.
+// Return true when text is a valid lowercase phrase.
+// A valid lowercase phrase:
+// - is not empty after trimming
+// - contains only lowercase letters and spaces
+// - does not start or end with whitespace
 // Example:
-// countBy(['ant', 'bear', 'cat'], word => String(word.length))
-// -> { '3': 2, '4': 1 }
-export function countBy<T>(arr: T[], fn: (item: T) => string): Record<string, number> {
-  const result: Record<string, number> = {}
-  for (const item of arr) {
-    const key = fn(item)
-    result[key] = 1 // bug
-  }
-  return result
+// isLowercasePhrase('web dev') -> true
+// isLowercasePhrase('JavaScript') -> false
+export function isLowercasePhrase(text: string): boolean {
+  return text.trim().length > 0 // bug: allows uppercase, punctuation, and outer whitespace
 }
 
-// Return a new array with duplicate values removed.
-// Keep the first occurrence of each value.
+// Count the number of words in the text.
+// Words are separated by one or more whitespace characters.
 // Example:
-// unique([1, 1, 2, 3, 2]) -> [1, 2, 3]
-export function unique<T>(arr: T[]): T[] {
-  return [...new Set(arr)] // correct
+// countWords('one two three') -> 3
+export function countWords(text: string): number {
+  return text.split(' ').length // bug: breaks on repeated spaces and whitespace-only strings
 }

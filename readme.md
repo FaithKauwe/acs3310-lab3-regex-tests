@@ -1,158 +1,110 @@
-# ACS 3310 — Lab 3: Writing Unit Tests
+# ACS 3310 — Lab 3: Prove the Bugs with Tests
 
 ## Overview
 
-In this lab you will practice writing **unit tests** for existing code.
+In this lab, you will write **unit tests** for existing string utility functions.
 
-You will NOT be writing new functions from scratch. Instead, your goal is to:
-
-- understand what each function is supposed to do
-- write tests that describe correct behavior
-- use tests to detect bugs
-- fix any bugs you discover
-
-This lab builds directly on Lesson 3:
-
-> Tests are used to **prove behavior**, not just check it.
-
----
-
-## What You Are Solving
-
-You are given a set of functions in:
-
-```
-src/functions.ts
-```
-
-Some of these functions are **incorrect**.
+The implementations in `src/functions.ts` are **intentionally incorrect**.
 
 Your job is to:
 
-1. Write tests that describe what each function *should* do
-2. Use those tests to reveal incorrect behavior
-3. Fix the implementation so all tests pass
+1. Read the function documentation  
+2. Write tests that describe the **correct behavior**  
+3. Use those tests to **prove the implementation is wrong**  
+4. Fix the functions so all tests pass
+
+> Tests should **fail first**, then pass after you fix the code.
 
 ---
 
-## Learning Goals
+## What You’re Given
 
-By the end of this lab you should be able to:
+- `src/functions.ts` — documented functions (with bugs)  
+- `tests/functions.test.ts` — a scaffold with placeholder tests (all pass initially)
 
-- write unit tests using Vitest
-- describe expected behavior using `expect`
-- identify edge cases
-- use tests to reveal and fix bugs
-
----
-
-## Setup
-
-Clone your repository:
-
-```bash
-git clone <your-repo-url>
-cd ACS-3310-Lab-3
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Run the tests:
-
-```bash
-npm test
-```
+Functions include:  
+- `collapseSpaces`  
+- `toKebabCase`  
+- `firstWords`  
+- `isLowercasePhrase`  
+- `countWords`
 
 ---
 
 ## Your Task
 
-For each function in `src/functions.ts`:
+For **each function**:
 
-- write **at least 2 meaningful tests**
-- include **at least 1 edge case**
-- make sure your tests clearly describe expected behavior
+- Replace the placeholder test with **real tests**  
+- Write **at least 2 meaningful tests**  
+- Include **at least 1 edge case**
 
-Your tests should:
-
-- FAIL when the function behaves incorrectly
-- PASS after the function is fixed
+Your tests must:  
+- reflect the **documented behavior** (not the current implementation)  
+- **fail** with the current buggy code  
+- **pass** after you fix the implementation
 
 ---
 
-## Important: Tests Should Fail First
+## Examples of What to Test
 
-When you begin this lab, all tests will pass because no real tests have been written.
+Think in terms of:
 
-As you write tests, you should expect:
-
-- some tests to FAIL at first
-- failures mean your tests are working
-- failures reveal bugs in the code
+- **Normal cases** — typical input  
+- **Edge cases** — empty strings, extra spaces, punctuation  
+- **Validation rules** — casing, trimming, allowed characters
 
 If your tests never fail, they are not useful.
 
 ---
 
-## What You Will Edit
+## Workflow
 
-You should primarily edit:
+1. Read a function’s documentation in `src/functions.ts`  
+2. Write tests in `tests/functions.test.ts`  
+3. Run tests:
 
-```
-tests/functions.test.ts
-```
-
-You may also edit:
-
-```
-src/functions.ts
+```bash
+npm test
 ```
 
-…but only after your tests reveal incorrect behavior.
+4. Observe failures  
+5. Fix the function  
+6. Re-run tests until all pass
 
 ---
 
-## What Is an Edge Case?
+## Setup
 
-An edge case is a boundary or unusual input where bugs often occur.
-
-Examples:
-
-- empty arrays
-- single-item arrays
-- very small or large values
+```bash
+git clone <your-repo-url>
+cd ACS-3310-Lab-3
+npm install
+npm test
+```
 
 ---
 
 ## Definition of Done
 
-You are finished when:
-
-- you have written meaningful tests for each function
-- your tests FAIL for incorrect behavior (at least initially)
-- you fix the implementation
-- all tests PASS (`npm test`)
-- your code is pushed to GitHub
+- Tests written for every function  
+- Each function has **2+ meaningful tests** and **1+ edge case**  
+- Tests **fail first**, then pass after fixes  
+- All tests pass (`npm test`)  
+- Changes pushed to GitHub
 
 ---
 
 ## Tips
 
-- Start by writing tests before changing any code
-- Read each function carefully
-- Ask: *What should this do?*
-- Use failing tests to guide your fixes
-- Avoid weak or duplicate tests
+- Don’t fix code until tests fail  
+- Test what the function **should do**, not what it does now  
+- Prefer small, focused tests  
+- Use edge cases to reveal bugs
 
 ---
 
 ## Submission
-
-Your work is submitted automatically when you push to GitHub.
 
 ```bash
 git add .
@@ -164,6 +116,6 @@ git push
 
 ## Reminder
 
-You are not just fixing bugs.
+You are not just fixing code.
 
-You are writing tests that **prove the bugs exist**, then verifying that your fixes work.
+You are writing tests that **prove the implementation is wrong**, then using them to verify your fix.

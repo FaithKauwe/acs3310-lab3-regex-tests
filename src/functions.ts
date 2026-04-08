@@ -3,7 +3,7 @@
 // Example:
 // collapseSpaces('  Hello   world\n\nfoo  ') -> 'Hello world foo'
 export function collapseSpaces(text: string): string {
-  return text.replace(/\s+/g, ' ') // bug: does not trim
+  return text.replace(/\s+/g, ' ').trim() 
 }
 
 // Convert text to kebab-case.
@@ -12,7 +12,7 @@ export function collapseSpaces(text: string): string {
 // Example:
 // toKebabCase('Hello, World!') -> 'hello-world'
 export function toKebabCase(text: string): string {
-  return text.toLowerCase().replace(/\s+/g, '-') // bug: leaves punctuation and extra hyphens
+  return text.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').replace(/^-+|-+$/g, '')
 }
 
 // Return the first `maxWords` words from the text.
@@ -20,7 +20,7 @@ export function toKebabCase(text: string): string {
 // Example:
 // firstWords('The quick brown fox jumps', 3) -> 'The quick brown'
 export function firstWords(text: string, maxWords: number): string {
-  return text.split(' ').slice(0, maxWords + 1).join(' ') // bug: returns one extra word
+  return text.split(' ').slice(0, maxWords).join(' ') // bug: returns one extra word
 }
 
 // Return true when text is a valid lowercase phrase.
@@ -32,13 +32,17 @@ export function firstWords(text: string, maxWords: number): string {
 // isLowercasePhrase('web dev') -> true
 // isLowercasePhrase('JavaScript') -> false
 export function isLowercasePhrase(text: string): boolean {
-  return text.trim().length > 0 // bug: allows uppercase, punctuation, and outer whitespace
+  return /^[a-z]+( [a-z]+)*$/.test(text)
 }
+
 
 // Count the number of words in the text.
 // Words are separated by one or more whitespace characters.
 // Example:
 // countWords('one two three') -> 3
+
 export function countWords(text: string): number {
-  return text.split(' ').length // bug: breaks on repeated spaces and whitespace-only strings
+  const trimmed = text.trim()
+  if (trimmed === '') return 0
+  return trimmed.split(/\s+/).length
 }
